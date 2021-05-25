@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Find_Duplicate_Accounts</name>
+        <label>Find Duplicate Accounts</label>
+        <locationX>182</locationX>
+        <locationY>278</locationY>
+        <actionName>FindDuplicateAccounts</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Are_There_Duplicates</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Fault_Screen</targetReference>
+        </faultConnector>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>accountRecord</name>
+            <value>
+                <elementReference>Account_Record</elementReference>
+            </value>
+        </inputParameters>
+        <outputParameters>
+            <assignToReference>Duplicate_Records</assignToReference>
+            <name>duplicateAccounts</name>
+        </outputParameters>
+    </actionCalls>
+    <apiVersion>51.0</apiVersion>
+    <decisions>
+        <name>Are_There_Duplicates</name>
+        <label>Are There Duplicates?</label>
+        <locationX>182</locationX>
+        <locationY>398</locationY>
+        <defaultConnector>
+            <targetReference>Dupes_Found_Screen</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>There_are_no_duplicates</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Duplicate_Records</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Dupe_Not_Found</targetReference>
+            </connector>
+            <label>There are no duplicates</label>
+        </rules>
+    </decisions>
+    <interviewLabel>Find Duplicate Accounts in Heirarchy {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Find Duplicate Accounts in Heirarchy</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <runInMode>SystemModeWithoutSharing</runInMode>
+    <screens>
+        <name>Dupe_Not_Found</name>
+        <label>Dupe Not Found</label>
+        <locationX>50</locationX>
+        <locationY>518</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>No_Dupes_Found</name>
+            <fieldText>&lt;p&gt;There are no duplicates associated to this Account within the Hierarchy. Congratulations! &lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Dupes_Found_Screen</name>
+        <label>Dupes Found Screen</label>
+        <locationX>314</locationX>
+        <locationY>518</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>Dupe_Account_Data</name>
+            <fieldText>&lt;p&gt;{!Duplicate_Records}&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Fault_Screen</name>
+        <label>Fault Screen</label>
+        <locationX>578</locationX>
+        <locationY>398</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>Fault_Message</name>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;There has been a fault error with this flow, please try again&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
+        <name>Find_Account_Duplicates</name>
+        <label>Find Account Duplicates</label>
+        <locationX>182</locationX>
+        <locationY>158</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Find_Duplicate_Accounts</targetReference>
+        </connector>
+        <fields>
+            <name>Find_Duplicates_Text</name>
+            <fieldText>&lt;p&gt;Click Next to Scan This Account for Duplicates&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Find_Account_Duplicates</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>Account_Record</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Account</objectType>
+    </variables>
+    <variables>
+        <name>Duplicate_Records</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Account</objectType>
+    </variables>
+</Flow>
