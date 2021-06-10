@@ -1,6 +1,6 @@
 /** Author: Shoby Abdi, Program Lead B2B Solution Architect Program
+ William Dressler, Integrated Customer Experience
 For Learning Lab: Designing Data Strategies for Complex Customer Relationships
-
 Purpose of this class is to be used by Invokable Action from a Flow Screen on an Account Record.
 This class traverses Account records heirarchy and returns all children record associated
 to account. Then using retrieved data new DataCloud classes eval records for duplicates against
