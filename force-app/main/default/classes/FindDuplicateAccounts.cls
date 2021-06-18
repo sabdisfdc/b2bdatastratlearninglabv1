@@ -1,6 +1,6 @@
 /** Author: Shoby Abdi, Program Lead B2B Solution Architect Program
- William Dressler, Integrated Customer Experience
 For Learning Lab: Designing Data Strategies for Complex Customer Relationships
+
 Purpose of this class is to be used by Invokable Action from a Flow Screen on an Account Record.
 This class traverses Account records heirarchy and returns all children record associated
 to account. Then using retrieved data new DataCloud classes eval records for duplicates against
@@ -14,26 +14,31 @@ global class FindDuplicateAccounts {
         List<Account> al = FindDuplicateAccounts.getAccountHeirarchy(accountRecord[0].accountRecord);
         
         //This is a very magic method
-        Datacloud.FindDuplicatesResult[] results = Datacloud.FindDuplicates.findDuplicates(al);
+        Datacloud.FindDuplicatesResult[] foundDuplicateResults = Datacloud.FindDuplicates.findDuplicates(al);
         
-        List<Account> duplicateAcountsFound = new List<Account>();
-        if(results.size() > 0) {
-            for (Datacloud.FindDuplicatesResult findDupeResult : results) {
-              for (Datacloud.DuplicateResult dupeResult : findDupeResult.getDuplicateResults()) {
+        Set<Id> accountUniques = new Set<Id>();
+        for (Datacloud.FindDuplicatesResult findDupeResult : foundDuplicateResults) {
+            for (Datacloud.DuplicateResult dupeResult : findDupeResult.getDuplicateResults()) {
                 for (Datacloud.MatchResult matchResult : dupeResult.getMatchResults()) {
-                  for (Datacloud.MatchRecord matchRecord : matchResult.getMatchRecords()) {
-                      duplicateAcountsFound.add((Account)matchRecord.getRecord());
-                  }
+                    for (Datacloud.MatchRecord matchRecord : matchResult.getMatchRecords()) {
+                        if(matchRecord.getMatchConfidence() > 0) {
+                            accountUniques.add(matchRecord.getRecord().Id);
+                        }
+                    }
                 }
-              }
             }
         }
-        
-        if(duplicateAcountsFound.size() > 0) {
+        if(accountUniques.size() > 0) {
+            List<Account> duplicateAcountsFound = [select Id, Name from Account where Id in: accountUniques];
             AccountFlowOutput output = new AccountFlowOutput();
             output.duplicateAccounts = duplicateAcountsFound;
-            return (List<AccountFlowOutput>)new List<AccountFlowOutput>().add(output);
-        } else return null;
+            List<AccountFlowOutput> listAccounts = new List<AccountFlowOutput>();
+            listAccounts.add(output);
+            return listAccounts;
+        } 
+        else {
+            return null;
+        }
     }
     
     public static List<Account> getAccountHeirarchy(Account account) {

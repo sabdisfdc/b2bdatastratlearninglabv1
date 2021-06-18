@@ -52,7 +52,7 @@
         </rules>
     </decisions>
     <interviewLabel>Find Duplicate Accounts in Heirarchy {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>Find Duplicate Accounts in Heirarchy</label>
+    <label>Find Duplicate Accounts in Hierarchy</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -99,7 +99,12 @@
         <allowPause>true</allowPause>
         <fields>
             <name>Dupe_Account_Data</name>
-            <fieldText>&lt;p&gt;{!Duplicate_Records}&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;u&gt;The following Ids related to the Accounts in this Hierarchy are found as duplicates&lt;/u&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>Duplicate_Records_Text</name>
+            <fieldText>&lt;p&gt;{!Duplicate_Records}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;{!Duplicate_Records_Text}&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -148,6 +153,11 @@
         </connector>
     </start>
     <status>Active</status>
+    <textTemplates>
+        <name>DuplicateRecordsText</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;{!Duplicate_Records}&lt;/p&gt;</text>
+    </textTemplates>
     <variables>
         <name>Account_Record</name>
         <dataType>SObject</dataType>
