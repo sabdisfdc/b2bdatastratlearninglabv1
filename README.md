@@ -21,6 +21,8 @@ To fully engage in the Learning Lab or at least understand the context of this c
 * [Customer-Centric Data Strategy with your Transactions](https://sfdc.co/PLC-CustomerCentricTransactions)
 
 ## Repo Inventory
+
+* FindDuplicateAccountsinHeirarchy.flow - The purpose of this flow is to navigate the entire Account hierarchy on a specific Account record and find duplicates related to the corporate name of the Account record thats been created. This is a screen flow versus a record triggered flow because account data could be coming from multiple sources and duplicate names is not an indication that one account is not unique versus the other. 
  
 ## Org Setup
 
