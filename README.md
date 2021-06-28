@@ -26,6 +26,10 @@ To fully engage in the Learning Lab or at least understand the context of this c
  
 ## Org Setup
 
+SHOBY TO ADD THE PLC SDO PROCESS
+
+http://githubsfdeploy.herokuapp.com/app/githubdeploy/b2bsolutionarchitectprogram/b2bdatastratlearninglabv1
+
 ## Metadata To Add
 
 ## Data Setup
