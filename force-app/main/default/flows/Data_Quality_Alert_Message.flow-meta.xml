@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Toast message calling to attention that the data quality is below 80%.</description>
+        <name>Data_Quality_Below_80</name>
+        <label>Data Quality Below 80%</label>
+        <locationX>132</locationX>
+        <locationY>398</locationY>
+        <actionName>c:showToast</actionName>
+        <actionType>component</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>message</name>
+            <value>
+                <elementReference>DataQualityScorebelow80MessageTemplate</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>type</name>
+            <value>
+                <stringValue>warning</stringValue>
+            </value>
+        </inputParameters>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <apiVersion>52.0</apiVersion>
+    <decisions>
+        <description>Checks the Data Quality Score and Asks the rep to address the missing data.</description>
+        <name>What_is_the_Data_Quality_Score</name>
+        <label>What is the Data Quality Score?</label>
+        <locationX>176</locationX>
+        <locationY>278</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Above_80</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>VAR_Account_ID.Data_Quality_Score__c</leftValueReference>
+                <operator>GreaterThanOrEqualTo</operator>
+                <rightValue>
+                    <numberValue>80.0</numberValue>
+                </rightValue>
+            </conditions>
+            <label>Above 80%</label>
+        </rules>
+        <rules>
+            <name>Below_80</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>VAR_Account_ID.Data_Quality_Score__c</leftValueReference>
+                <operator>LessThan</operator>
+                <rightValue>
+                    <numberValue>80.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Data_Quality_Below_80</targetReference>
+            </connector>
+            <label>Below 80%</label>
+        </rules>
+    </decisions>
+    <description>This Flow launches when an Account record opens and checks if the Data Quality Score is below 80%.</description>
+    <interviewLabel>Data Quality Alert Message {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Data Quality Alert Message</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordLookups>
+        <description>Queries the Current Account Record and gets the primary fields used in the Data Quality Score</description>
+        <name>Get_Current_Account_Record</name>
+        <label>Get Current Account Record</label>
+        <locationX>176</locationX>
+        <locationY>158</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>What_is_the_Data_Quality_Score</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>VAR_Account_ID.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Account</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <runInMode>DefaultMode</runInMode>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Current_Account_Record</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <description>This is the message body is for the toast screen that calls out the data quality score is below 80%.</description>
+        <name>DataQualityScorebelow80MessageTemplate</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Oh no!  It looks like the data quality score is not up to standards.  Please take a look at the following fields and make sure we have the data and it is up to date.  Remember Data Quality is how we understand our Customers.  Better data makes everything work better.   
+
+Fields to check: 
+Account&apos;s Legal Name, 
+Billing and Shipping Addresses (Street, Postal Code, and Country), and the 
+Phone, 
+Website, 
+Industry.</text>
+    </textTemplates>
+    <variables>
+        <description>The variable that take the Account ID passed into it.</description>
+        <name>VAR_Account_ID</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Account</objectType>
+    </variables>
+</Flow>

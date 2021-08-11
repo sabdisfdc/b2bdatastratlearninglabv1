@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>US_Phone_Number_Has_Ten_Digits</fullName>
+    <active>false</active>
+    <description>Validates that the Phone number is in (999) 999-9999
+format. This works by using the REGEX function to check that the number has ten
+digits in the (999) 999-9999 format.</description>
+    <errorConditionFormula>NOT(REGEX(Phone, &quot;\\D*?(\\d\\D*?){10}&quot;))</errorConditionFormula>
+    <errorMessage>Please validate that the Phone number has 10 digits and is in (999) 999-9999</errorMessage>
+</ValidationRule>

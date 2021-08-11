@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Valid_Email_Format_Syntax</fullName>
+    <active>false</active>
+    <description>Validates that the email address is properly formed.  &apos;Domain @ Site . Domain&apos;</description>
+    <errorConditionFormula>REGEX(PersonEmail,&quot;[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}&quot;)</errorConditionFormula>
+    <errorMessage>Please Validate that the email address is properly formed.  &apos;Domain @ Site . Domain&apos; or blank</errorMessage>
+</ValidationRule>

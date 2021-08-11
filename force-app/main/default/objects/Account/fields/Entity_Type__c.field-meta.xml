@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Entity_Type__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( AND(DNB_D_U_N_S_Number__c = D_B_GU_DUNS__c, D_B_Location_Type__c = &quot;HQ/Parent&quot;), &quot;GU&quot;, 
+IF(AND(DNB_D_U_N_S_Number__c &lt;&gt; D_B_GU_DUNS__c, D_B_Location_Type__c = &quot;HQ/Parent&quot; ), &quot;HQ&quot;, 
+IF(AND(D_B_GU_DUNS__c &lt;&gt; &quot;&quot;,OR(D_B_Location_Type__c = &quot;Single Location&quot;,D_B_Location_Type__c = &quot;Branch&quot;)),&quot;Branch&quot;,
+IF(AND(OR(D_B_Location_Type__c = &quot;Single Location&quot;,D_B_Location_Type__c = &quot;Branch&quot;),D_B_GU_DUNS__c = &quot;&quot;),&quot;Sole Account&quot;,null)
+) 
+))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Entity_Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>
