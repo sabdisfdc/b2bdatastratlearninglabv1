@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
-        <members>Account_Hierarchy_Builder</members>
-        <members>Data_Quality_Alert_Message</members>
-        <members>Find_Duplicate_Accounts_in_Heirarchy</members>
-        <members>Map_Branch_to_Hierarchy</members>
-        <members>Map_HQ_to_Hierarchy</members>
-        <members>Map_Single_Location_to_Hierarchy</members>
-        <members>Map_True_Branch_to_Hierarchy</members>
-        <name>Flow</name>
+        <members>FindDuplicateAccounts</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>showToast</members>
+        <name>AuraDefinitionBundle</name>
     </types>
     <types>
         <members>Account.Account_Process_Ran__c</members>
@@ -26,23 +24,22 @@
         <members>Account.Data_Quality_Score__c</members>
         <members>Account.Entity_Type__c</members>
         <members>Account.Exclude_from_Automation__c</members>
+        <members>Account.External_ID__c</members>
         <name>CustomField</name>
     </types>
     <types>
-        <members>showToast</members>
-        <name>AuraDefinitionBundle</name>
+        <members>Account_Hierarchy_Builder</members>
+        <members>Data_Quality_Alert_Message</members>
+        <members>Find_Duplicate_Accounts_in_Heirarchy</members>
+        <members>Map_Branch_to_Hierarchy</members>
+        <members>Map_HQ_to_Hierarchy</members>
+        <members>Map_Single_Location_to_Hierarchy</members>
+        <members>Map_True_Branch_to_Hierarchy</members>
+        <name>Flow</name>
     </types>
     <types>
-        <members>FindDuplicateAccounts</members>
-        <name>ApexClass</name>
-    </types>
-        <types>
-        <members>*</members>
-        <name>DuplicateRule</name>
-    </types>
-    <types>
-        <members>*</members>
-        <name>MatchingRules</name>
+        <members>Admin</members>
+        <name>Profile</name>
     </types>
     <types>
         <members>Account.Mailing_Address_Fields_Are_Required</members>
@@ -50,6 +47,5 @@
         <members>Account.Valid_Email_Format_Syntax</members>
         <name>ValidationRule</name>
     </types>
-
     <version>51.0</version>
 </Package>
