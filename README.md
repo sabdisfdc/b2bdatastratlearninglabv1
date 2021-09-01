@@ -68,4 +68,25 @@ While this is the easiest way to deploy you may choose other options. If so we r
 ## Metadata To Add
 
 ## Data Setup
+1.  Load the CSV Account file to your SDO org.  
+ *  We recommend using Data Loader 
+ *  This lab aims to show how to take an unstructured and unlinked set of customer data and convert it into a future state model that aligns into the best practices of a B2B environment.  For this scenario, the focus on foundational objects relevant to Accounts and their data model, quality, clean up, automation and alignment of business processes. The Account Object is the primary focus of the experiment. However, the Lead, Contact, Opportunity, and Case objects may also be referenced. 
+
+## Assumptions
+ 1. Advanced Admin skill set
+ * Ability to set and configure a core Sales Cloud instance.
+ * Basic SOQL queries
+ 2. Use of Data Loader or Data Import Wizard or other tools;
+ * About Salesforce Data Loader 	https://developer.salesforce.com/docs/atlas.en-us.dataLoader.meta/dataLoader/data_loader.htm
+ * Data Loader io https://dataloader.io/ 
+ * Chrome Extension with Tooling API https://chrome.google.com/webstore/detail/salesforce-inspector/aodjmnfhjibkcdimpodiifdjnnncaafh?hl=en 
+3.  Learners have WorkBench or a SDLC environment to deploy with
+
+## Disclaimers
+1. Guidance is directionally accurate, but due to changes in customer data, external applications, and platform, some elements may need to be massaged to deploy and function correctly.  
+2. The data in this example references a real world entity and uses sample data, but is not from actual source customer data.  If using the D&B optimizer, the source data is supplied from them.  
+3. Do not use actual customer data for this workshop.
+4. Do not use the example configuration, change set in a customer deployment as is. 
+5. Everything provided is “As Is” without any promise or guarantee of functionality or any commitment of current or future support.  The examples are for use during the workshop and end at its conclusion. 
+6. The design and implementation is for illustration only.  Do not implement this pattern without careful consideration and ensure that the design meets the customer's current and future needs.     
 
