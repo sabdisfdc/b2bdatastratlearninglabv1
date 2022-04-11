@@ -13,7 +13,7 @@ You will see a file within the repository called _config.yml. Its purpose is to 
 
 ## Learning Lab Videos
 
-Feel free to engage in the Learning Lab or simply take the repo here and work at your own pace. You will find videos related to the lab at our Video hub [here](). 
+Feel free to engage in the Learning Lab or simply take the repo here and work at your own pace. You will find videos related to the lab at our Video hub [here](https://b2bsa.hubs.vidyard.com/watch/MuRadsvtYnG1tDUsLtzxx2). 
 
 ## Learning Lab Courses
 
@@ -59,7 +59,7 @@ Partners Learners will go to Partner Learning Camp to complete the SDO Fundament
 
 Thanks to Andrew Fawcett [@andyinthecloud](https://twitter.com/andyinthecloud) we have this incredible single click process to deploy the code in this Github repo to the org you just generated
 
-[http://githubsfdeploy.herokuapp.com/app/githubdeploy/b2bsolutionarchitectprogram/b2bdatastratlearninglabv1](http://githubsfdeploy.herokuapp.com/app/githubdeploy/b2bsolutionarchitectprogram/b2bdatastratlearninglabv1)
+[https://githubsfdeploy.herokuapp.com/app/githubdeploy/b2bsolutionarchitectprogram/b2bdatastratlearninglabv1](https://githubsfdeploy.herokuapp.com/app/githubdeploy/b2bsolutionarchitectprogram/b2bdatastratlearninglabv1)
 
 To learn more about githubsfdeploy please check out his Github Repo: [https://github.com/afawcett/githubsfdeploy](https://github.com/afawcett/githubsfdeploy)
 
